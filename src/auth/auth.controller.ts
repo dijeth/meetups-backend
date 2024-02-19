@@ -59,8 +59,8 @@ export class AuthController {
   ) {}
 
   @Get('user')
-  @UseGuards(AuthenticatedGuard)
   @ApiSecurity('cookie-session')
+  @UseGuards(AuthenticatedGuard)
   @ApiOperation({ summary: 'Получение пользователя сессии' })
   @ApiOkResponse({
     description: 'Пользователь сессии',

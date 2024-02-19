@@ -3,6 +3,7 @@
 ## Быстрый старт
 
 ##### Подготовка
+
 ```shell script
 # Установка зависимостей
 npm ci
@@ -45,6 +46,7 @@ PUBLIC_URL=http://localhost:3000
 ## База Данных
 
 Регенерация БД с тестовыми данными:
+
 ```shell script
 npm run db:refresh
 ```
@@ -54,3 +56,8 @@ npm run db:refresh
 ## Документация API
 
 http://localhost:3000/api
+
+## Fast fix express-session
+
+node_modules/express-session/index.js:230
+https://github.com/expressjs/session/issues/837
