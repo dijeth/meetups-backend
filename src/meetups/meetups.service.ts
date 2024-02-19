@@ -59,7 +59,9 @@ export class MeetupsService {
       if (meetup.organizer.id === user.id) {
         meetup.organizing = true;
       }
-      if (meetup.participants.contains(user)) {
+      // This doesn't work...
+      // if (meetup.participants.contains(user)) {
+      if (meetup.participants.getItems().find((it) => it.id === user.id)) {
         meetup.attending = true;
       }
     }
