@@ -16,6 +16,7 @@
     "db:refresh": "ts-node src/maintenance/db-refresh-cli.ts"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@mikro-orm/cli": "^4.5.10",
     "@mikro-orm/core": "^4.5.10",
     "@mikro-orm/nestjs": "^4.3.1",
