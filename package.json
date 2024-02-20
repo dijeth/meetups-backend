@@ -5,6 +5,9 @@
   "author": "Grigorii K. Shartsev <me@shgk.me>",
   "private": true,
   "license": "MIT",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "npm run prebuild && nest build && npm run db:refresh",
