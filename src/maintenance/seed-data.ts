@@ -28,9 +28,6 @@ function readImageSync(filename: string): ImageFile {
   return image;
 }
 
-const CURRENT_YEAR = new Date().getUTCFullYear();
-const CURRENT_MONTH = new Date().getUTCMonth();
-
 const IMAGES = [
   readImageSync('anastasia-kuznichenkova-8w_JshgzTjY-unsplash-compressor.jpg'),
   readImageSync('antenna-ohNCIiKVT1g-unsplash-compressor.jpg'),
@@ -71,12 +68,19 @@ const TITLES = [
   'С++ ОНЛАЙН 2024',
 ];
 
-const uniqueMeetupTitleGetter = (titles: string[]) => {
-  let restTitles = [...titles];
+const uniqueArrayElementGetter = <T = any>(
+  array: T[],
+  defaultItem: T,
+): (() => T) => {
+  let restItems = [...array];
   return () => {
-    const title = fakerEN.helpers.arrayElement(restTitles);
-    restTitles = restTitles.filter((it) => it !== title);
-    return title;
+    if (!restItems.length) {
+      return defaultItem;
+    }
+
+    const item = fakerEN.helpers.arrayElement(restItems);
+    restItems = restItems.filter((it) => it !== item);
+    return item;
   };
 };
 
@@ -102,7 +106,10 @@ export function getDataToSeed(): AnyEntity[] {
       .toString()
       .substring(2);
 
-  const getMeetupTitle = uniqueMeetupTitleGetter(TITLES);
+  const getMeetupTitle = uniqueArrayElementGetter<string>(
+    TITLES,
+    fakerEN.company.name().toLocaleUpperCase(),
+  );
 
   const userDemo = new UserEntity({
     email: 'demo@email',
@@ -129,6 +136,8 @@ export function getDataToSeed(): AnyEntity[] {
 
   users.push(userDemo);
 
+  const getOrganizer = uniqueArrayElementGetter<UserEntity>(users, userDemo);
+
   const meetups = Array(MEETUP_COUNT)
     .fill(1)
     .map(() => {
@@ -139,13 +148,13 @@ export function getDataToSeed(): AnyEntity[] {
         description: getDescription(),
       });
 
-      meetup.organizer = fakerEN.helpers.arrayElement(users);
+      meetup.organizer = getOrganizer();
       meetup.image = buildImage(
         fakerEN.helpers.arrayElement(IMAGES),
         meetup.organizer,
       );
 
-      if (fakerEN.helpers.arrayElement([true, false])) {
+      if (fakerEN.helpers.arrayElement([true, false, false])) {
         meetup.participants.add(userDemo);
       }
 
@@ -197,5 +206,5 @@ export function getDataToSeed(): AnyEntity[] {
       return meetup;
     });
 
-  return meetups;
+  return [...meetups, userAdmin];
 }
