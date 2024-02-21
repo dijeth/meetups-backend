@@ -16,7 +16,8 @@
     "start:dev": "nest start --watch --exec \"node -r source-map-support/register\"",
     "start:debug": "nest start --debug --watch --exec \"node -r source-map-support/register\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "db:refresh": "ts-node src/maintenance/db-refresh-cli.ts"
+    "db:refresh": "ts-node src/maintenance/db-refresh-cli.ts",
+    "script": "ts-node src/maintenance/script.ts"
   },
   "dependencies": {
     "@faker-js/faker": "^8.4.1",
@@ -35,7 +36,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "connect-sqlite3": "^0.9.11",
-    "express-session": "^1.17.0",
+    "express-session": "file:/home/jeth/@work/forks/session",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",

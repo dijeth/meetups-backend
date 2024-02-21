@@ -51,7 +51,7 @@ export class MeetupEntity {
     pivotTable: 'participation',
     joinColumn: 'meetup_id',
     inverseJoinColumn: 'user_id',
-    cascade: [Cascade.PERSIST, Cascade.MERGE, Cascade.REMOVE],
+    cascade: [Cascade.PERSIST, Cascade.MERGE],
   })
   participants = new Collection<UserEntity>(this);
 
